@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Kaushik-Kaja/kaushik-kaja.github.io#readme",
   "dependencies": {
-    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/vite": "^4.2.1",
     "@types/three": "^0.183.1",
     "astro": "^6.0.2",
     "gsap": "^3.14.2",
