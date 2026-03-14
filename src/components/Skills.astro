@@ -1,0 +1,60 @@
+---
+const skillGroups = [
+  {
+    category: 'Languages',
+    items: ['TypeScript', 'Python', 'JavaScript', 'Swift', 'Java', 'MATLAB', 'HTML/CSS'],
+  },
+  {
+    category: 'Frontend',
+    items: ['React', 'Next.js', 'Three.js', 'Tailwind CSS', 'Vite'],
+  },
+  {
+    category: 'Backend & Data',
+    items: ['FastAPI', 'Node.js', 'Convex', 'MongoDB', 'PostgreSQL', 'Firebase'],
+  },
+  {
+    category: 'AI & ML',
+    items: ['Google Gemini', 'Claude API', 'MCP', 'PyTorch', 'Scikit-Learn', 'Browser Use'],
+  },
+  {
+    category: 'CAD & Fabrication',
+    items: ['Solidworks', 'AutoCAD', 'CNC Machining', '3D Printing', 'FEA Analysis', 'Bluebeam'],
+  },
+  {
+    category: 'Tools & Platforms',
+    items: ['Git', 'Docker', 'AWS', 'PowerBI', 'Figma', 'Linux'],
+  },
+];
+---
+
+<section id="skills" class="py-32 px-6 relative">
+  <div class="max-w-5xl mx-auto">
+    <span class="section-num">04</span>
+
+    <div class="reveal">
+      <p class="font-mono text-sm tracking-[0.2em] mb-4 gradient-text">SKILLS</p>
+      <h2 class="text-4xl md:text-6xl font-bold mb-16">
+        Tech I <span class="gradient-text">use</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {skillGroups.map((group) => (
+        <div class="reveal p-8 rounded-2xl glass">
+          <h3 class="font-mono text-xs tracking-[0.2em] mb-6 uppercase gradient-text">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            {group.items.map((skill) => (
+              <span class="stagger text-sm px-5 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-white/45 hover:text-white hover:border-[#fd321c]/30 hover:bg-[#fd321c]/5 transition-all duration-300 cursor-default hoverable">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="divider max-w-5xl mx-auto mt-32"></div>
+</section>

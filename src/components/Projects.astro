@@ -1,0 +1,142 @@
+---
+const softwareProjects = [
+  {
+    title: 'GTFO',
+    description: 'AI-powered moving platform that automates the entire relocation process. Browser agents search and apply to apartments across Zillow, Redfin, and Craigslist, auto-update your address on 40+ services, and compare moving quotes — all orchestrated through a real-time dashboard with live agent progress tracking.',
+    tech: ['Next.js', 'Convex', 'FastAPI', 'Google Gemini', 'Browser Use'],
+    github: 'https://github.com/charlie-robison/gtfo',
+  },
+  {
+    title: 'Arceus',
+    description: '3D robot navigation system combining Gaussian Splatting scene reconstruction with AI-powered path planning. Gemini analyzes bird\'s-eye views to detect waypoints and obstacles, while depth estimation pipelines provide real-time spatial awareness through WebSocket-driven Three.js visualizations.',
+    tech: ['Three.js', 'FastAPI', 'PyTorch', 'Google Gemini', 'MongoDB'],
+    github: 'https://github.com/charlie-robison/arceus',
+  },
+  {
+    title: 'BioFact',
+    description: 'Computational fact-checker for drug discovery papers. Extracts drug-protein interaction claims from research, generates synthetic saboteur molecules with key functional groups removed, then runs physics-based binding affinity simulations to verify or refute published findings.',
+    tech: ['Next.js', 'FastAPI', 'Claude API', 'RDKit', 'Boltz-2'],
+    github: 'https://github.com/charlie-robison/bio-fact',
+  },
+  {
+    title: 'Pythia',
+    description: 'MCP-powered prediction market platform with integrated AI research and risk management agents. Explore and track positions across markets spanning politics, crypto, economics, science, and sports with real-time P&L calculations and event analysis.',
+    tech: ['React', 'TypeScript', 'MCP', 'Vite', 'Zod'],
+    github: 'https://github.com/charlie-robison/pythia',
+  },
+];
+
+const hardwareProjects = [
+  {
+    title: '3-Axis Stacking Robot',
+    description: 'Designed and built a competition robot featuring a 3-axis motion system with dual turrets, vertical lift, and horizontal extension — capable of stacking blocks up to 7 feet tall with zero mechanical breakdowns across an entire season. Ranked #1 internationally in FTC.',
+    tech: ['Solidworks', 'CNC', '3D Printing', 'FEA'],
+    image: '/projects/stacking-robot.png',
+  },
+  {
+    title: 'Projectile Launcher Robot',
+    description: 'Engineered a high-speed competition robot with a PID-controlled projectile launcher achieving 97% accuracy. Used MATLAB to calculate optimal launch angles and velocities, iterating through a comprehensive test log. Won the FTC World Championship against 5,000+ teams.',
+    tech: ['MATLAB', 'PID Control', 'Solidworks', 'Rapid Prototyping'],
+    image: '/projects/launcher-robot.jpg',
+  },
+  {
+    title: 'Angled Lift Block Deposit Robot',
+    description: 'Led design and fabrication of a robot optimized for seamless block pickup-to-deposit transfers. Full CAD-first approach drove design advancements that reduced task completion times, with all custom parts CNC-machined in-house using optimized router paths.',
+    tech: ['Solidworks', 'CNC Machining', 'CAD/CAM', 'Tolerance Analysis'],
+    image: '/projects/angled-lift.png',
+  },
+  {
+    title: 'Cube Payload Drop-off Robot',
+    description: 'Built an autonomy-focused competition robot with a modular chassis designed for rapid reconfiguration. Developed through hands-on experimentation and iterative prototyping, reinforcing the value of a full CAD-driven design workflow.',
+    tech: ['Solidworks', 'Modular Design', '3D Printing', 'Prototyping'],
+    image: '/projects/cube-robot.png',
+  },
+];
+import ExplodedImage from './ExplodedImage.astro';
+---
+
+<section id="projects" class="py-32 px-6 relative">
+  <div class="max-w-5xl mx-auto">
+    <span class="section-num">03</span>
+
+    <div class="reveal">
+      <p class="font-mono text-sm tracking-[0.2em] mb-4 gradient-text">PROJECTS</p>
+      <h2 class="text-4xl md:text-6xl font-bold mb-6">
+        Selected <span class="gradient-text">work</span>
+      </h2>
+    </div>
+
+    <!-- Software Projects -->
+    <div class="reveal mb-4 mt-16">
+      <h3 class="font-mono text-xs tracking-[0.2em] uppercase text-white/25">Software & AI</h3>
+    </div>
+
+    <div class="space-y-6 mb-20">
+      {softwareProjects.map((project, i) => (
+        <div class="reveal group relative p-8 md:p-10 rounded-2xl glass glow-hover transition-all duration-500 overflow-hidden">
+          <div class="absolute left-0 top-8 bottom-8 w-[2px] bg-gradient-to-b from-[#fd321c] to-[#ff8a00] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+            <div class="flex-1">
+              <span class="font-mono text-xs text-white/20 mb-3 block">0{i + 1}</span>
+              <h3 class="text-2xl font-bold mb-3 group-hover:text-white transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-white/35 text-sm leading-relaxed mb-5 max-w-lg">
+                {project.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map((t) => (
+                  <span class="stagger text-xs font-mono px-3 py-1.5 rounded-full bg-white/[0.04] text-white/40 border border-white/[0.06]">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="flex gap-5 md:mt-6">
+              <a
+                href={project.github}
+                class="text-white/25 hover:text-[#fd321c] text-sm font-medium transition-colors duration-300 hoverable"
+                target="_blank"
+                rel="noopener"
+              >
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Hardware / Robotics Projects -->
+    <div class="reveal mb-4">
+      <h3 class="font-mono text-xs tracking-[0.2em] uppercase text-white/25">Hardware & Robotics</h3>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {hardwareProjects.map((project) => (
+        <div class="group rounded-2xl glass glow-hover transition-all duration-500 overflow-hidden">
+          <ExplodedImage src={project.image} alt={project.title} cols={5} rows={4} />
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-white transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-white/35 text-sm leading-relaxed mb-4">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span class="text-xs font-mono px-3 py-1.5 rounded-full bg-white/[0.04] text-white/40 border border-white/[0.06]">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="divider max-w-5xl mx-auto mt-32"></div>
+</section>

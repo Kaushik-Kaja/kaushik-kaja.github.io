@@ -1,0 +1,30 @@
+{
+  "name": "kaushik-kaja.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaushik-Kaja/kaushik-kaja.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kaushik-Kaja/kaushik-kaja.github.io/issues"
+  },
+  "homepage": "https://github.com/Kaushik-Kaja/kaushik-kaja.github.io#readme",
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "@types/three": "^0.183.1",
+    "astro": "^6.0.2",
+    "gsap": "^3.14.2",
+    "tailwindcss": "^3.4.19",
+    "three": "^0.183.2"
+  }
+}

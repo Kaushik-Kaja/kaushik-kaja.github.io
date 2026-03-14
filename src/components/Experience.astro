@@ -1,0 +1,81 @@
+---
+const experiences = [
+  {
+    company: 'Kiewit',
+    role: 'Systems Engineering / Build & Design Engineering Intern',
+    period: 'Jun 2023 — Present',
+    highlights: [
+      'Built an internal AI tool using PyTorch and Scikit-Learn to automate requirement management across projects',
+      'Created a project database with auto-generated PowerBI progress reports',
+      'Reviewed and corrected roadway plans within Bluebeam, updating cost reports with quantity take-offs and labor hours',
+    ],
+  },
+  {
+    company: 'NASA',
+    role: 'Data Science Intern',
+    period: 'Dec 2022 — May 2023',
+    highlights: [
+      'Maintained the NASA AIML (Artificial Intelligence/Machine Learning) database',
+      'Collected and organized data on projects, tools, and people across NASA\'s data science initiatives',
+      'Collaborated with the Agency to establish virtual community spaces for data science',
+    ],
+  },
+  {
+    company: 'Data Force FTC #6929',
+    role: 'Lead Mechanical Engineer & Team Leader',
+    period: '2014 — 2021',
+    highlights: [
+      'Led the team to an FTC World Championship victory, competing against 5,000+ teams globally',
+      'Designed robots with 500+ part assemblies in Solidworks, fabricating all components in-house via CNC, lathe, and 3D printing',
+      'Fundraised over $100,000 across 7 years and developed STEM courses for students in India and China',
+    ],
+  },
+  {
+    company: 'The Coup',
+    role: 'Co-Founder & Founding Engineer',
+    period: '2021 — Present',
+    highlights: [
+      'Building an iOS and web app to simplify the college subleasing process',
+    ],
+  },
+];
+---
+
+<section id="experience" class="py-32 px-6 relative">
+  <div class="max-w-5xl mx-auto">
+    <span class="section-num">02</span>
+
+    <div class="reveal">
+      <p class="font-mono text-sm tracking-[0.2em] mb-4 gradient-text">EXPERIENCE</p>
+      <h2 class="text-4xl md:text-6xl font-bold mb-16">
+        Where I've <span class="gradient-text">worked</span>
+      </h2>
+    </div>
+
+    <div class="space-y-6">
+      {experiences.map((exp) => (
+        <div class="reveal group relative p-8 md:p-10 rounded-2xl glass glow-hover transition-all duration-500 overflow-hidden">
+          <div class="absolute left-0 top-8 bottom-8 w-[2px] bg-gradient-to-b from-[#fd321c] to-[#ff8a00] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+            <div>
+              <h3 class="text-xl font-bold group-hover:text-white transition-colors">{exp.company}</h3>
+              <p class="text-white/40 text-sm">{exp.role}</p>
+            </div>
+            <span class="font-mono text-xs text-white/25 md:mt-1 shrink-0">{exp.period}</span>
+          </div>
+
+          <ul class="space-y-2">
+            {exp.highlights.map((h) => (
+              <li class="text-white/35 text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#fd321c]/30">
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="divider max-w-5xl mx-auto mt-32"></div>
+</section>

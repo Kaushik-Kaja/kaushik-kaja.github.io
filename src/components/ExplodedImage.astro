@@ -1,0 +1,142 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  cols?: number;
+  rows?: number;
+}
+
+const { src, alt, cols = 5, rows = 4 } = Astro.props;
+const totalTiles = cols * rows;
+const tiles = Array.from({ length: totalTiles }).map((_, i) => ({
+  col: i % cols,
+  row: Math.floor(i / cols),
+  index: i,
+}));
+---
+
+<div class="exploded-wrapper" data-cols={cols} data-rows={rows}>
+  <div class="exploded-container" style={`position: relative; aspect-ratio: 4/3;`}>
+    {tiles.map((tile) => (
+      <div
+        class="exploded-tile"
+        data-index={tile.index}
+        style={`
+          position: absolute;
+          left: ${(tile.col / cols) * 100}%;
+          top: ${(tile.row / rows) * 100}%;
+          width: ${100 / cols}%;
+          height: ${100 / rows}%;
+          overflow: hidden;
+        `}
+      >
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          style={`
+            position: absolute;
+            width: ${cols * 100}%;
+            height: ${rows * 100}%;
+            left: ${-tile.col * 100}%;
+            top: ${-tile.row * 100}%;
+            object-fit: cover;
+          `}
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .exploded-wrapper {
+    overflow: visible;
+    border-radius: 1rem;
+  }
+
+  .exploded-wrapper.assembled {
+    overflow: hidden;
+  }
+
+  .exploded-tile {
+    opacity: 0;
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) rotate(var(--rot, 0deg)) scale(var(--sc, 0.5));
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .exploded-wrapper.assembled .exploded-tile {
+    opacity: 1;
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+</style>
+
+<script>
+  function initExplodedImages() {
+    const wrappers = document.querySelectorAll('.exploded-wrapper');
+
+    wrappers.forEach((wrapper) => {
+      const tiles = wrapper.querySelectorAll<HTMLElement>('.exploded-tile');
+      const cols = parseInt(wrapper.getAttribute('data-cols') || '5');
+      const rows = parseInt(wrapper.getAttribute('data-rows') || '4');
+      const container = wrapper.querySelector('.exploded-container') as HTMLElement;
+      const containerWidth = container.offsetWidth || 400;
+      const containerHeight = container.offsetHeight || 300;
+
+      tiles.forEach((tile, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+
+        const centerCol = (cols - 1) / 2;
+        const centerRow = (rows - 1) / 2;
+        const dirX = col - centerCol;
+        const dirY = row - centerRow;
+
+        // Spread proportional to container size
+        const spreadX = containerWidth * 0.3 + Math.random() * containerWidth * 0.2;
+        const spreadY = containerHeight * 0.3 + Math.random() * containerHeight * 0.2;
+        const tx = dirX * spreadX / cols + (Math.random() - 0.5) * 40;
+        const ty = dirY * spreadY / rows + (Math.random() - 0.5) * 40;
+        const rot = (Math.random() - 0.5) * 25;
+
+        tile.style.setProperty('--tx', `${tx}px`);
+        tile.style.setProperty('--ty', `${ty}px`);
+        tile.style.setProperty('--rot', `${rot}deg`);
+        tile.style.setProperty('--sc', '0.6');
+
+        const dist = Math.sqrt(dirX * dirX + dirY * dirY);
+        const maxDist = Math.sqrt(centerCol * centerCol + centerRow * centerRow);
+        const delay = (dist / maxDist) * 0.25 + Math.random() * 0.05;
+        tile.style.transitionDelay = `${delay}s`;
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Small delay so the exploded state is visible first
+              requestAnimationFrame(() => {
+                wrapper.classList.add('assembled');
+              });
+            } else {
+              wrapper.classList.remove('assembled');
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      observer.observe(wrapper);
+    });
+  }
+
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExplodedImages);
+  } else {
+    initExplodedImages();
+  }
+
+  document.addEventListener('astro:page-load', initExplodedImages);
+</script>
